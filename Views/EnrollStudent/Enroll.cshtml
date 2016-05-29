@@ -1,0 +1,193 @@
+﻿@using UniversityManagementSystemByReturnNull.Models
+
+@{
+    ViewBag.Title = "Enroll";
+    List<Student> students = ViewBag.Students;
+}
+
+@section css
+{
+
+    <link href="~/Asset/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/Asset/css/style.css" rel="stylesheet" />
+    <link href="~/Asset/css/wickedpicker.css" rel="stylesheet" />
+    <link href="~/Asset/css/jquery-ui.css" rel="stylesheet" />
+}
+
+
+
+<div class="container">
+
+    <div class="row">
+        <form id="enrollCourse" method="POST">
+            <div class="banner-top">
+                <h2>Enroll In A Course</h2>
+                <div class="banner-bottom">
+
+
+
+                    <div class="bnr-one">
+                        <div class="bnr-left">
+                            <p><label for="StudentId">Reg No</label></p>
+                        </div>
+                        <div class="bnr-right">
+                            <select id="StudentId" name="StudentId">
+                                <option value="">Select...</option>
+                                @foreach (var student in students)
+                                {
+                                    <option value="@student.Id">@student.RegistrationNo</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <div class="bnr-one">
+                        <div class="bnr-left">
+                            <p><label for="Name">Name</label></p>
+                        </div>
+                        <div class="bnr-right">
+                            <input type="text" id="Name" name="Name" disabled><br>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    <div class="bnr-one">
+                        <div class="bnr-left">
+                            <p><label for="Email">Email</label></p>
+                        </div>
+                        <div class="bnr-right">
+                            <input type="text" id="Email" name="Email" disabled><br>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    <div class="bnr-one">
+                        <div class="bnr-left">
+                            <p><label for="DepartmentId">Department</label></p>
+                        </div>
+                        <div class="bnr-right">
+                            <input type="text" id="DepartmentId" name="DepartmentId" disabled />
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    <div class="bnr-one">
+                        <div class="bnr-left">
+                            <p><label for="CourseId">Course</label></p>
+                        </div>
+                        <div class="bnr-right">
+                            <select id="CourseId" name="CourseId">
+                                <option value="">Select....</option>
+                            </select>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+
+
+                    <div class="bnr-one">
+                        <div class="bnr-left">
+                            <p><label for="EnrollDate">Date</label></p>
+                        </div>
+                        <div class="bnr-right">
+
+                            <input name="EnrollDate" class="date" id="datepicker" type="text" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}" required=>
+
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <div class="bnr-btn">
+                        <input type="submit" value="Enroll" />
+                    </div>
+                    <div>
+                        @if (ViewBag.Message != null)
+                        {
+                            <div class="text-warning">
+                                @ViewBag.Message
+                            </div>
+
+                        }
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+@section scripts
+{
+    <script src="~/Scripts/jquery-2.2.3.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Asset/js/jquery-ui.js">
+    </script>
+    <script>
+        $(function () {
+            $("#datepicker,#datepicker1").datepicker();
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+
+            $("#enrollCourse").validate({
+                rules: {
+                    StudentId: "required",
+                    CourseId: "required",
+                    EnrollDate: "required"
+                },
+                messages: {
+                    StudentId: "Please select student Registration No",
+                    CourseId: "Please select Course",
+                    EnrollDate: "Select the date"
+                }
+            });
+
+            $("#StudentId").change(function () {
+                var stId = $("#StudentId").val();
+                $("#CourseId").empty();
+                var json = { studentId: stId };
+
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("GetStudentById", "EnrollStudent")',
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify(json),
+                    success: function (data) {
+
+
+                        var name = data.Name;
+                        var email = data.Email;
+                        var dept = data.Department;
+                        $("#Name").val(name);
+                        $("#Email").val(email);
+                        $("#DepartmentId").val(dept);
+                    }
+                });
+
+
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("GetCourseByStudentId", "EnrollStudent")',
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify(json),
+                    success: function (data) {
+
+
+                        $.each(data, function (key, value) {
+
+                            $("#CourseId").append('<option value=' + value.Id + '>' + value.Name + '</option>');
+
+                        });
+                    }
+                });
+
+            });
+        });
+
+    </script>
+}

@@ -1,0 +1,57 @@
+﻿@section css
+{
+
+    <link href="~/Asset/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/Asset/css/style.css" rel="stylesheet" />
+    <link href="~/Asset/css/wickedpicker.css" rel="stylesheet" />
+}
+@{
+    ViewBag.Title = "UnAssign";
+}
+
+
+<div class="container">
+
+    <div class="row">
+        <form method="POST">
+            <div class="banner-top">
+                <h2>Unassign All Courses</h2>
+                <div class="banner-bottom">
+
+
+                    <div class="bnr-btn">
+                        <input type="submit" value="Unassign Courses" data-confirm="Are you sure to UnAssign All Courses?" />
+                    </div>
+                    <div align="center">
+                        @if (ViewBag.Message != null)
+                        {
+                            <div class="text-success">
+                                @ViewBag.Message
+                            </div>
+                        }
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+@section scripts
+{
+    <script src="~/Scripts/jquery-2.2.3.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script>
+        $(document).ready(function() {
+            jQuery('[data-confirm]').click(function(e) {
+                if (!confirm(jQuery(this).attr("data-confirm"))) {
+                    e.preventDefault();
+                }
+            });
+        });
+    </script>
+}

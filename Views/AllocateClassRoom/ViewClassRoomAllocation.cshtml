@@ -1,0 +1,107 @@
+﻿@using UniversityManagementSystemByReturnNull.Models
+
+@{
+    ViewBag.Title = "ViewClassRoomAllocation";
+    List<Department> departmentList = ViewBag.AllDepartment;
+    List<Room> roomList = ViewBag.AllClassRoom;
+}
+
+  
+<div style="">
+    
+   
+    <div style="width: 500px; margin: 0 auto;">
+        <h2 style="color: white">Select Department </h2>
+        <br/>
+        <select id="DepartmentId" >
+            <option value="">...Select...</option>
+            @foreach (var department in departmentList)
+            {
+                <option value="@department.Id">@department.Name</option>
+            }
+        </select>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+    </div>
+</div>
+
+ 
+
+        <table id="ClassSchedule" border="1" height="75%" width="75%" align="center">
+
+            <tbody style="color: white"><tr><th>Course Code</th><th>Course Name</th><th> Schedule Info</th></tr></tbody>
+
+        </table>
+
+<br/>
+<br/>
+<br/>
+<br/>
+    @section scripts
+    {
+    <script src="~/Scripts/jquery-2.2.3.js"></script>
+    <script>
+                $(document).ready(function () {
+
+                    $("#DepartmentId").change(function () {
+                        $('#ClassSchedule > tbody > tr').empty();
+
+                        var departmentId = $("#DepartmentId").val();
+                        //alert(departmentId);
+                        //("#departmentId").empty();
+                        var json = { departmentId: departmentId };
+                        $.ajax({
+                            //
+                            type: "POST",
+                            url: '@Url.Action("GetCourseScheduleByDepartmentId", "AllocateClassRoom")',
+                            contentType: "application/json; charset=utf-8",
+                            data: JSON.stringify(json),
+                            success: function (data) {
+                                $("#ClassSchedule").append('<tr><th>Course Code</th><th>Course Name</th><th> Schedule Info</th></tr>');
+
+
+                                $.each(data, function (key, value) {
+                                    //alert(key);
+                                    //if(value.AllocateStatus==="Unallocated"){
+                                    //$("#ClassSchedule").append('<tr><td>' + value.CourseCode + '</td>'
+                                    // + '<td>' + value.CourseName + '</td>'
+                                    // + '<td>' + 'Not Scheduled Yet' + '</td></tr>'
+                                    //    );
+                                    //}
+                                    //else {
+                                        $("#ClassSchedule").append('<tr><td>' + value.CourseCode + '</td>'
+                                         + '<td>' + value.CourseName + '</td>'
+                                         + '<td>' + value.ScheduleInfo + '</td></tr>'
+                                            );
+                                    //}
+                                    //$("#CreditToTake").val(value.CreditToTake);
+
+
+                                });
+
+
+                                // ................
+
+
+
+                            }
+                        });
+
+
+
+
+                    });
+
+
+
+
+
+                });
+    </script>
+
+
+}
+
+

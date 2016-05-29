@@ -1,0 +1,332 @@
+﻿@using UniversityManagementSystemByReturnNull.Models
+
+@{
+    ViewBag.Title = "AllocateClassRoom";
+    List<Department> departmentList = ViewBag.AllDepartment;
+    List<Room> roomList = ViewBag.AllClassRoom;
+    List<Day> dayList = ViewBag.AllDays;
+
+}
+
+@section css
+{
+
+    <link href="~/Asset/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/Asset/css/style.css" rel="stylesheet" />
+    <link href="~/Asset/css/wickedpicker.css" rel="stylesheet" />
+}
+<fieldset style="width:50%">
+    
+    @*<form method="post" id="AllocateClassRoom" name="AllocateClassRoom">
+        @if (ViewBag.Message != null)
+        {
+            <p>@ViewBag.Message</p>
+        }
+
+        <table>
+
+            <tr>
+
+
+                <td><label for="DepartmentIdsssss" />Department Name</td>
+                <td>
+
+                    <select id="DepartmentIdsssss" name="DepartmentId">
+                        <option value="default">...Select...</option>
+                        @foreach (var department in departmentList)
+                        {
+                            <option value="@department.Id">@department.Name</option>
+                        }
+
+
+                    </select>
+
+                </td>
+
+            </tr>
+            <tr>
+                <td>
+                    <label for="CourseId">Course</label>
+                </td>
+                <td>
+                    <select id="CourseId" name="CourseId">
+                        <option value="">Select.....</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+
+
+                <td><label for="RoomID" />Room No</td>
+                <td>
+
+                    <select id="RoomId" name="RoomId">
+                        <option value="default">...Select...</option>
+                        @foreach (var room in roomList)
+                        {
+                            <option value="@room.Id">@room.Name</option>
+                        }
+
+
+                    </select>
+
+                </td>
+            </tr>
+            <tr>
+
+
+                <td><label for="DayId" />Day</td>
+                <td>
+                    <select id="DayId" name="DayId">
+                        <option value="default">...Select...</option>
+                        @foreach (var day in dayList)
+                        {
+                            <option value="@day.Id">@day.Name</option>
+                        }
+
+                        </select>
+
+
+</td>
+            </tr>
+            <tr>
+                <td><label for="Form" />From</td>
+                <td><input name="Fromtime" /></td>
+
+            </tr>
+            <tr>
+                <td><label for="To" />To</td>
+                <td>
+                    <input name="Totime" />
+                </td>
+
+            </tr>
+
+
+            <tr>
+                <td></td>
+                <td><input type="submit" name="hh" value="Allocate" style="float:right"></td>
+            </tr>
+
+        </table>
+
+
+
+    </form>*@
+    
+    
+    
+    <div class="container">
+
+        <div class="row">
+            <form id="AllocateClassRoom" name="AllocateClassRoom" method="POST">
+                <div class="banner-top">
+                    <h2>Allocate Class Room</h2>
+                    <div class="banner-bottom">
+
+
+
+                        <div class="bnr-one">
+                            <div class="bnr-left">
+                                
+                                <p><label for="DepartmentIdsssss">Department Name</label></p>
+                            </div>
+                            <div class="bnr-right">
+                                <select id="DepartmentIdsssss" name="DepartmentId">
+                                    <option value="default">...Select...</option>
+                                    @foreach (var department in departmentList)
+                                    {
+                                        <option value="@department.Id">@department.Name</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+
+                        <div class="bnr-one">
+                            <div class="bnr-left">
+                                <p><label for="CourseId">Course</label></p>
+                            </div>
+                            <div class="bnr-right">
+                                <select id="CourseId" name="CourseId">
+                                    <option value="">Select.....</option>
+                                </select>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+
+                        <div class="bnr-one">
+                            <div class="bnr-left">
+
+                                <p><label for="RoomId">Room No</label></p>
+                            </div>
+                            <div class="bnr-right">
+                                <select id="RoomId" name="RoomId">
+                                    <option value="default">...Select...</option>
+                                    @foreach (var room in roomList)
+                                    {
+                                        <option value="@room.Id">@room.Name</option>
+                                    }
+
+                                </select>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        
+                        <div class="bnr-one">
+                            <div class="bnr-left">
+
+                                <p><label for="DayId">Day</label></p>
+                            </div>
+                            <div class="bnr-right">
+                                <select id="DayId" name="DayId">
+                                    <option value="default">...Select...</option>
+                                    @foreach (var day in dayList)
+                                    {
+                                        <option value="@day.Id">@day.Name</option>
+                                    }
+
+                                </select>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+
+                        
+                        
+                      
+
+                        <div class="bnr-one">
+                            <div class="bnr-left">
+                                <p><label for="From">From</label></p>
+                            </div>
+                            <div class="bnr-right">
+                                <input name="Fromtime" /><br>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+
+                        <div class="bnr-one">
+                            <div class="bnr-left">
+                                <p><label for="To">To</label></p>
+                            </div>
+                            <div class="bnr-right">
+                                <input name="Totime" /><br>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+
+
+                        <div class="bnr-btn">
+                            <input type="submit" name="hh" value="Allocate">
+                        </div>
+                        <div>
+                            @if (ViewBag.Message != null)
+                            {
+                                <div class="text-warning">
+                                    @ViewBag.Message
+                                </div>
+
+                            }
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    
+    
+
+    @section scripts
+{
+    <script src="~/Scripts/jquery-2.2.3.js"></script>
+
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.21/themes/redmond/jquery-ui.css" />
+
+    <link href="~/Scripts/jQuery.ptTimeSelect-0.8/src/jquery.ptTimeSelect.css" rel="stylesheet" />
+    <script src="~/Scripts/jQuery.ptTimeSelect-0.8/src/jquery.ptTimeSelect.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('input[name="Totime"]').ptTimeSelect();
+            $('input[name="Fromtime"]').ptTimeSelect();
+            $.validator.addMethod("valueNotEquals", function(value, element, arg) {
+                return arg != value;
+            }, "Please Select One.");
+
+            $("#AllocateClassRoom").validate({
+                rules: {
+                    DepartmentId: {
+                        valueNotEquals: "default"
+                    },
+                    CourseId: {
+                        valueNotEquals: "default"
+
+                    },
+                    RoomId: {
+                        valueNotEquals: "default"
+                    },
+                    Day: {
+                        valueNotEquals: "default"
+                    },
+                    Fromtime: {
+                        required: true
+                    },
+                    Totime: {
+                        required: true
+                    }
+                },
+                messages: {
+        
+                }
+            });
+            ///////////Load CourseCode by Department ID
+            $("#DepartmentIdsssss").change(function() {
+                $("#CourseId").empty();
+
+                var departmentId = $("#DepartmentIdsssss").val();
+                var json = { departmentId: departmentId };
+
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("GettAllCourseByDepartmentId", "AllocateClassRoom")',
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify(json),
+                    success: function(data) {
+
+                        $.each(data, function(key, value) {
+                            //alert(key);
+                            $("#CourseId").append('<option value=' + value.Id + '>' + value.Name + '</option>');
+                            //$("#CreditToTake").val(value.CreditToTake);
+
+
+                        });
+
+
+                        // ................
+
+
+                        //............
+                    }
+                });
+
+
+            });
+            ///////////////
+
+
+        });
+    </script>
+
+
+
+}
+
+
+</fieldset>

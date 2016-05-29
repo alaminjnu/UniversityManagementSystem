@@ -1,0 +1,196 @@
+﻿@section css
+{
+
+    <link href="~/Asset/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/Asset/css/style.css" rel="stylesheet" />
+    <link href="~/Asset/css/wickedpicker.css" rel="stylesheet" />
+}
+@{
+    ViewBag.Title = "Save";
+}
+
+
+
+<div class="container">
+
+    <div class="row">
+        <form id="saveStudentResult" method="POST">
+            <div class="banner-top">
+                <h2>Save Result</h2>
+                <div class="banner-bottom">
+
+
+
+                    <div class="bnr-one">
+                        <div class="bnr-left">
+                            <p><label for="StudentId">Student Reg. No</label></p>
+                        </div>
+                        <div class="bnr-right">
+                            <select id="StudentId" name="StudentId">
+                                <option value="">Select.....</option>
+                                @foreach (var student in ViewBag.Students)
+                                {
+                                    <option value="@student.Id">@student.RegistrationNo</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <div class="bnr-one">
+                        <div class="bnr-left">
+                            <p><label for="Name">Name</label></p>
+                        </div>
+                        <div class="bnr-right">
+                            <input type="text" id="Name" name="Name" disabled><br>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="bnr-one">
+                        <div class="bnr-left">
+                            <p><label for="Email">Email</label></p>
+                        </div>
+                        <div class="bnr-right">
+                            <input type="text" id="Email" name="Email" disabled><br>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="bnr-one">
+                        <div class="bnr-left">
+                            <p><label for="Department">Department</label></p>
+                        </div>
+                        <div class="bnr-right">
+                            <input type="text" id="Department" name="Department" disabled />
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="bnr-one">
+                        <div class="bnr-left">
+                            <p><label for="CourseId">Course</label></p>
+                        </div>
+                        <div class="bnr-right">
+                            <select id="CourseId" name="CourseId">
+                                <option value="">Select....</option>
+                            </select>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <div class="bnr-one">
+                        <div class="bnr-left">
+                            <p><label for="Grade">Grade</label></p>
+                        </div>
+                        <div class="bnr-right">
+
+                            <select id="Grade" name="Grade">
+                                <option value="">Select...</option>
+                                <option value="A+">A+</option>
+                                <option value="A">A</option>
+                                <option value="A-">A-</option>
+                                <option value="B+">B+</option>
+                                <option value="B">B</option>
+                                <option value="B-">B-</option>
+                                <option value="C+">C+</option>
+                                <option value="C">C</option>
+                                <option value="C-">C-</option>
+                                <option value="D+">D+</option>
+                                <option value="D">D</option>
+                                <option value="D-">D-</option>
+                                <option value="F">F</option>
+                            </select>
+
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+
+
+                    <div class="bnr-btn">
+                        <input type="submit" value="Save Result" />
+                    </div>
+                    <div>
+                        @if (ViewBag.Message != null)
+                        {
+                            <div class="text-warning">
+                                @ViewBag.Message
+                            </div>
+
+                        }
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+
+
+@section scripts{
+<script src="~/Scripts/jquery-2.2.3.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#saveStudentResult").validate({
+            rules: {
+                StudentId: "required",
+                CourseId: "required",
+                Grade: "required"
+            },
+            messages: {
+                StudentId: "Please select the student reg no",
+                CourseId: "Please select a course",
+                Grade:"Please select grade"
+            }
+        });
+
+
+        $("#StudentId").change(function () {
+            var stId = $("#StudentId").val();
+            $("#CourseId").empty();
+            var json = { studentId: stId };
+
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("GetStudentById", "StudentResult")',
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(json),
+                success: function (data) {
+                    //alert(data);
+
+                    var name = data.Name;
+                    var email = data.Email;
+                    var dept = data.Department;
+                    $("#Name").val(name);
+                    $("#Email").val(email);
+                    $("#Department").val(dept);
+                }
+            });
+
+
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("GetCoursesTakebByStudent", "StudentResult")',
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(json),
+                success: function (data) {
+
+
+                    $.each(data, function (key, value) {
+                        //alert(key);
+                        $("#CourseId").append('<option value=' + value.Id + '>' + value.Name + '</option>');
+
+                    });
+                }
+            });
+
+        });
+
+    });
+</script>
+}

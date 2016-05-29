@@ -1,0 +1,91 @@
+﻿@model IEnumerable<UniversityManagementSystemByReturnNull.Models.ViewCourseModel>
+@{
+    ViewBag.Title = "Show Course Statistics";
+}
+@section css
+{
+
+    <link href="~/Asset/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/Asset/css/style.css" rel="stylesheet" />
+    <link href="~/Asset/css/wickedpicker.css" rel="stylesheet" />
+}
+
+
+<div class="container">
+
+    <div class="row">
+
+        <form id="saveCourseForm" method="POST">
+            <div class="banner-top">
+                <h2>View Course Statistics</h2>
+
+
+                <div class="bnr-one">
+                    <div class="bnr-left">
+                        <p><label for="DepartmentId">Select Department</label></p>
+                    </div>
+                    <div class="bnr-right">
+                        <select id="DepartmentId" name="DepartmentId">
+                            <option value="">Select Department....</option>
+                            @foreach (var dept in ViewBag.Departments)
+                            {
+                                <option value="@dept.Id">@dept.Name</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="clearfix">
+
+                    </div>
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+</section>
+<section id="bottom">
+    <div class="container wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
+        <div class="row">
+            <table border="1" height="75%" width="75%" align="center">
+                <tr>
+                    <th>Code</th>
+                    <th>Name</th>
+                    <th>Semester</th>
+                    <th>Teacher</th>
+                </tr>
+                <tbody id="myData" style="color: black"></tbody>
+            </table>
+        </div>
+    </div>
+
+
+
+@section scripts
+{
+    <script src="~/Scripts/jquery-2.2.3.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("#DepartmentId").change(function() {
+                $("#myData").empty();
+                var deptId = $("#DepartmentId").val();
+                var json = { departmentId: deptId };
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("GetCourseInformationByDepartmentId", "ViewCourse")',
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify(json),
+                    success: function(data) {
+
+                        $.each(data, function(index, value) {
+
+                            var row = $("<tr><td>" + value.Code + "</td><td>" + value.Name + "</td><td>" + value.Semester + "</td><td>" + value.Teacher + "</td></tr>");
+                            $("#myData").append(row);
+                        });
+                    }
+            });
+            });
+        });
+    </script>
+}

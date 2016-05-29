@@ -1,0 +1,121 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>@ViewBag.Title - University Management System</title>
+        <link href="http://localhost:51974/Asset/css/animate.min.css" rel="stylesheet" />
+        <link href="http://localhost:51974/Asset/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="http://localhost:51974/Asset/css/font-awesome.min.css" rel="stylesheet" />
+        <link href="http://localhost:51974/Asset/css/main.css" rel="stylesheet" />
+        <link href="http://localhost:51974/Asset/css/prettyPhoto.css" rel="stylesheet" />
+        <link href="http://localhost:51974/Asset/css/responsive.css" rel="stylesheet" />
+
+
+        <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"
+              rel="stylesheet" type="text/css" />
+        @RenderSection("css", required: false)
+        @Scripts.Render("~/bundles/modernizr")
+
+    </head>
+    <body>
+        <header id="header">
+            <nav class="navbar navbar-inverse" role="banner">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a @Html.ActionLink( "UMS","Index", "Home", null, new { @class = "navbar-brand" })@*<img src="~/Asset/images/bitm_logo.png" />*@</a>
+                    </div>               
+                    <div class="collapse navbar-collapse navbar-right">
+                        <ul class="nav navbar-nav">
+
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Department <i class="fa fa-angle-down"></i></a>
+                                <ul class="dropdown-menu">
+                                    <li>@Html.ActionLink("Department Save", "Save", "Department")</li>
+                                    <li>@Html.ActionLink("View Department", "Show", "Department")</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Course <i class="fa fa-angle-down"></i></a>
+                                <ul class="dropdown-menu">
+                                    <li>@Html.ActionLink("Course Save", "Save", "Course")</li>
+                                    <li>@Html.ActionLink("ViewCourse", "ShowCourseStatistics", "ViewCourse")</li>
+                                    <li>@Html.ActionLink("Unassign Courses", "UnAssign", "UnassignCourse")</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Teacher <i class="fa fa-angle-down"></i></a>
+                                <ul class="dropdown-menu">
+                                    <li>@Html.ActionLink("Teacher Save", "Save", "Teacher")</li>
+                                    <li>@Html.ActionLink("Course Assign To Teacher", "CourseAssignToTeacher", "CourseAssignToTeacher")</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Allocate ClassRoom <i class="fa fa-angle-down"></i></a>
+                                <ul class="dropdown-menu">
+                                    <li>@Html.ActionLink("Allocate ClassRoom", "AllocateClassRoom", "AllocateClassRoom")</li>
+                                    <li>@Html.ActionLink("View Course Schedule", "ViewClassRoomAllocation", "AllocateClassRoom")</li>
+                                    <li>@Html.ActionLink("Unallocate Classroom", "Unallocate", "UnallocateClassroom")</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Student <i class="fa fa-angle-down"></i></a>
+                                <ul class="dropdown-menu">
+                                    <li>@Html.ActionLink("Register Student", "Register", "Student")</li>
+                                    <li>@Html.ActionLink("Enroll In A Course", "Enroll", "EnrollStudent")</li>
+                                    <li>@Html.ActionLink("Save Student Result", "Save", "StudentResult")</li>
+                                    <li>@Html.ActionLink("View Result", "ViewStudentResult", "StudentResultView")</li>
+                                </ul>
+                            </li>
+                            
+
+                            
+                        </ul>
+                    </div>
+                </div><!--/.container-->
+            </nav><!--/nav-->
+        @*<div class="container body-content">*@
+            </header>
+            <section id="middle">
+
+
+                @RenderBody()
+
+
+            </section>
+            @*</div>*@
+            <footer id="footer" class="midnight-blue">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <p>&copy; @DateTime.Now.Year - University Course And Result Management System</p>
+                        </div>
+                        <div class="col-sm-6">
+                            <ul class="pull-right">
+                                <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                                <li>@Html.ActionLink("About", "Index", "Home")</li>          
+                                <li>@Html.ActionLink("Contact", "Index", "Home")</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <a href="#" class="back-to-top"><i class="fa fa-2x fa-angle-up"></i></a>
+            </footer>
+            @Scripts.Render("~/bundles/jquery")
+            <script src="~/Asset/js/jquery.isotope.min.js"></script>
+            <script src="~/Asset/js/bootstrap.min.js"></script>
+            <script src="~/Asset/js/jquery.js"></script>
+            <script src="~/Asset/js/jquery.prettyPhoto.js"></script>
+            <script src="~/Asset/js/main.js"></script>
+            <script src="~/Asset/js/wow.min.js"></script>
+            @Scripts.Render("~/bundles/bootstrap")
+            @RenderSection("scripts", required: false)
+
+</body>
+</html>

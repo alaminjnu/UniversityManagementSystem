@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            @Html.ActionLink("University Management System", "Index", "Index", null, new { @class = "navbar-brand" })
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li>@Html.ActionLink("Department", "Save", "Department")</li>
+                <li>@Html.ActionLink("View Department", "Show", "Department")</li>
+                <li>@Html.ActionLink("Course", "Save", "Course")</li>
+                <li>@Html.ActionLink("Teacher", "Save", "Teacher")</li>
+                <li>@Html.ActionLink("Course Assign To Teacher", "CourseAssignToTeacher", "CourseAssignToTeacher")</li>
+                <li>@Html.ActionLink("View Course", "ShowCourseStatistics", "ViewCourse")</li>
+                @*<li>@Html.ActionLink("Register Student", "Register", "Student")</li>*@
+                <li>@Html.ActionLink("Allocate ClassRoom", "AllocateClassRoom", "AllocateClassRoom")</li>
+                @*<li>@Html.ActionLink("View Course Schedule", "ViewClassRoomAllocation", "AllocateClassRoom")</li>
+              <li>@Html.ActionLink("Enroll In A Course", "Enroll", "EnrollStudent")</li>
+                <li>@Html.ActionLink("Save Student Result", "Save", "StudentResult")</li>
+                <li>@Html.ActionLink("Unassign Courses", "UnAssign", "UnassignCourse")</li>*@
+                <li>@Html.ActionLink("Unallocate Classroom", "UnAllocate", "UnallocateClassroom")</li>
+            </ul>
+         
+            @*@Html.Partial("_LoginPartial")*@
+        </div>
+    </div>
+</div>

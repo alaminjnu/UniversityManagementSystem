@@ -1,0 +1,165 @@
+﻿@section css
+{
+
+    <link href="~/Asset/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/Asset/css/style.css" rel="stylesheet" />
+    <link href="~/Asset/css/wickedpicker.css" rel="stylesheet" />
+    <link href="~/Asset/css/Custom.css" rel="stylesheet" />
+}
+@{
+    ViewBag.Title = "Course Save";
+}
+
+
+<div class="container">
+
+    <div class="row">
+
+        <form id="saveCourseForm" method="POST">
+            <div class="banner-top">
+                <h2>Save Course</h2>
+                <div class="banner-bottom">
+                    <div class="bnr-one">
+                        <div class="bnr-left">
+                            <p>@Html.Label("Code")</p>
+                        </div>
+                        <div class="bnr-right">
+                            @Html.TextBox("Code")
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="bnr-one">
+                        <div class="bnr-left">
+                            <p>@Html.Label("Name")</p>
+                        </div>
+
+                        <div class="bnr-right">
+                            @Html.TextBox("Name")
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <div class="bnr-one">
+                        <div class="bnr-left">
+                            <p>@Html.Label("Credit")</p>
+                        </div>
+
+                        <div class="bnr-right">
+                            @Html.TextBox("Credit")
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <div class="bnr-one">
+                        <div class="bnr-left">
+                            <p>@Html.Label("Description")</p>
+                        </div>
+
+                        <div class="bnr-right">
+                            @Html.TextArea("Description")
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+
+
+                    <div class="bnr-one">
+                        <div class="bnr-left">
+                            <p><label for="DepartmentId">Department</label></p>
+                        </div>
+                        <div class="bnr-right">
+                            <select id="DepartmentId" name="DepartmentId">
+                                <option value="">Select Department....</option>
+                                @foreach (var dept in ViewBag.Departments)
+                                {
+                                    <option value="@dept.Id">@dept.Name</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <div class="bnr-one">
+                        <div class="bnr-left">
+                            <p><label for="SemesterId">Semester</label></p>
+                        </div>
+                        <div class="bnr-right">
+                            <select id="SemesterId" name="SemesterId">
+                                <option value="">Select Semester....</option>
+                                @foreach (var sem in ViewBag.Semesters)
+                                {
+                                    <option value="@sem.Id">@sem.Name</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <div class="bnr-btn">
+                        <input type="submit" value="Save" />
+                    </div>
+                </div>
+                <br />
+                <div>
+                    @if (ViewBag.Message != null)
+                    {
+                        <div class="text-warning">
+                            @ViewBag.Message
+                        </div>
+
+                    }
+                </div>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+@section scripts
+{
+    <script src="~/Scripts/jquery-2.2.3.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#saveCourseForm").validate({
+                rules: {
+                    Code: {
+                        required: true,
+                        minlength: 5
+                    },
+                    Name: "required",
+                    Description: "required",
+                    Credit: {
+                        required: true,
+                        number: true,
+                        range: [0.5, 5.00]
+
+                    },
+
+                    DepartmentId: "required",
+                    SemesterId: "required"
+
+                },
+                messages: {
+                    Code: {
+                        required: "Please enter the Course Code!",
+                        minlength: "Code must be atleast five characters long!"
+                    },
+
+                    Name: "Please enter the Course Name!",
+                    Description: "Write something about course!",
+                    Credit: {
+                        required: "Credit is required!",
+                        number: "Please! Enter numeric figure only!",
+                        range: "Credit must be beween 0.5 and 5.00"
+                    },
+                    DepartmentId: "Please select department!",
+                    SemesterId: "Please select semester!"
+                }
+            });
+        });
+    </script>
+}

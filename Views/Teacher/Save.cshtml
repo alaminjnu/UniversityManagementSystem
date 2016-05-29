@@ -1,0 +1,145 @@
+﻿@using UniversityManagementSystemByReturnNull.Models
+@model UniversityManagementSystemByReturnNull.Models.Teacher
+@{
+    ViewBag.Title = "Save";
+    List<Department> departments = ViewBag.Departments;
+    List<Designation> designations = ViewBag.Designations;
+}
+@section css
+{
+
+    <link href="~/Asset/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/Asset/css/style.css" rel="stylesheet" />
+    <link href="~/Asset/css/wickedpicker.css" rel="stylesheet" />
+<link href="~/Asset/css/Custom.css" rel="stylesheet" />
+}
+
+<div class="container">
+
+    <div class="row">
+        @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "saveCourseForm" }))
+        {
+            <div class="banner-top">
+                <h2>Save Teacher</h2>
+                <div class="banner-bottom">
+                    <div class="bnr-one">
+                        <div class="bnr-left">
+                            <p>@Html.LabelFor(model => model.Name)</p>
+                        </div>
+                        <div class="bnr-right">
+                            @Html.TextBoxFor(model => model.Name)
+                            @Html.ValidationMessageFor(model => model.Name)
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="bnr-one">
+                        <div class="bnr-left">
+                            <p>@Html.LabelFor(model => model.Address)</p>
+                        </div>
+                        <div class="bnr-right">
+                            @Html.TextBoxFor(model => model.Address)
+                            @Html.ValidationMessageFor(model => model.Address)
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="bnr-one">
+                        <div class="bnr-left">
+                            <p>@Html.LabelFor(model => model.Email)</p>
+                        </div>
+                        <div class="bnr-right">
+                            @Html.TextBoxFor(model => model.Email)
+                            @Html.ValidationMessageFor(model => model.Email)
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="bnr-one">
+                        <div class="bnr-left">
+                            <p>@Html.LabelFor(model => model.ContactNo)</p>
+                        </div>
+                        <div class="bnr-right">
+                            @Html.TextBoxFor(model => model.ContactNo)
+                            @Html.ValidationMessageFor(model => model.ContactNo)
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <div class="bnr-one">
+                        <div class="bnr-left">
+                            <p><label for="DepartmentId">Department</label></p>
+                        </div>
+                        <div class="bnr-right">
+                            <select id="DepartmentId" name="DepartmentId">
+                                <option value="">Select Department....</option>
+                                @foreach (var dept in ViewBag.Departments)
+                                {
+                                    <option value="@dept.Id">@dept.Name</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="bnr-one">
+                        <div class="bnr-left">
+                            <p><label for="DesignationId">Designation</label></p>
+                        </div>
+                        <div class="bnr-right">
+                            <select id="DesignationId" name="DesignationId">
+                                <option value="">Select Designation....</option>
+                                @foreach (var designation in ViewBag.Designations)
+                                {
+                                    <option value="@designation.Id">@designation.DesignationName</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+
+
+                    <div class="bnr-one">
+                        <div class="bnr-left">
+                            <p>@Html.LabelFor(model => model.CreditToBeTaken)</p>
+                        </div>
+                        <div class="bnr-right">
+                            @Html.TextBoxFor(model => model.CreditToBeTaken)
+                            @Html.ValidationMessageFor(model => model.CreditToBeTaken)
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <div class="bnr-btn">
+                        <input type="submit" value="Save" />
+                    </div>
+                </div>
+                <br />
+                <div align="center">
+                    @if (ViewBag.Message != null)
+                    {
+                        <div class="text-danger">
+                            @ViewBag.Message
+                        </div>
+                    }
+                </div>
+                <div align="center">
+                    @if (ViewBag.Msg != null)
+                    {
+                        <div class="text-success">
+                            @ViewBag.Msg
+                        </div>
+                    }
+                </div>
+
+            </div>
+
+        }
+
+    </div>
+
+</div>
+
+
+
+@section scripts{
+    <script src="~/Scripts/jquery-2.2.3.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+}

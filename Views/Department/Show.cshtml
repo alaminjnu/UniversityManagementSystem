@@ -1,0 +1,32 @@
+﻿@using UniversityManagementSystemByReturnNull.Models
+
+@{
+    ViewBag.Title = "Show";
+    List<Department> departments = ViewBag.Departments;
+}
+
+<h2 style="text-align: center; color: white">Department List</h2>
+<br/>
+<table id="departmentTable" border="1" height="75%" width="75%"  align="center">
+    <thead bgcolor="#00FF33">
+        <tr>
+            <th>Code</th>
+            <th>Name</th>
+        </tr>
+    </thead>
+    @foreach (var dept in departments)
+    {
+        <tbody style="color: white; ">
+            <tr>
+                <td>@dept.Code</td>
+                <td>@dept.Name</td>
+            </tr>
+        </tbody>
+    }
+
+</table>
+
+<br/>
+<br/>
+<br/>
+<br/>

@@ -1,0 +1,48 @@
+﻿@using GridMvc.Html
+@model IEnumerable<UniversityManagementSystemByReturnNull.Models.Student>
+@{
+    ViewBag.Title = "StudentInfo";
+}
+
+@section css
+{
+
+    <link href="~/Asset/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/Asset/css/style.css" rel="stylesheet" />
+    <link href="~/Asset/css/wickedpicker.css" rel="stylesheet" />
+    <link href="~/Asset/css/jquery-ui.css" rel="stylesheet" />
+    <link href="~/Asset/css/Custom.css" rel="stylesheet" />
+}
+<br/>
+<div class="text-success">
+    <h2 align="center" >Student Saved SuccesFully with Following Info</h2>
+</div>
+
+<br/>
+<br/>
+<br/>
+<p>
+    @Html.Grid(Model).Columns(columns =>
+    {
+        columns.Add(st => st.RegistrationNo)
+            .Titled("Registration No");
+        columns.Add(st => st.Name)
+            .Titled("Name");
+        columns.Add(st => st.Email)
+            .Titled("Email");
+        columns.Add(st => st.ContactNo)
+            .Titled("Mobile");
+        columns.Add(st => st.RegistrationDate)
+            .Titled("RegistrationDate");
+        columns.Add(st => st.Address)
+            .Titled("Address");
+    }).WithPaging(4).Sortable().WithMultipleFilters()
+</p>
+
+<br/>
+<br/>
+<p align="center">
+    @Html.ActionLink("Back to Register Student", "Register")
+</p>
+<br/>
+<br/>

@@ -1,0 +1,103 @@
+﻿@section css
+{
+
+    <link href="~/Asset/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/Asset/css/style.css" rel="stylesheet" />
+    <link href="~/Asset/css/wickedpicker.css" rel="stylesheet" />
+}
+@{
+    ViewBag.Title = "Save";
+}
+
+<div align="center">
+    @if (ViewBag.Message != null)
+    {
+        <div class="text-danger">
+            @ViewBag.Message
+        </div>
+    }
+</div>
+<div align="center">
+    @if (ViewBag.Msg != null)
+{
+    <div class="text-success">
+        @ViewBag.Msg
+        </div>
+}
+</div>
+
+<div class="container">
+
+    <div class="row">
+
+        <form id="myForm" method="POST">
+            <div class="banner-top">
+                <h2>Save Department</h2>
+                <div class="banner-bottom">
+                    <div class="bnr-one">
+                        <div class="bnr-left">
+                            <p>Code</p>
+                        </div>
+
+                        <input type="text" id="Code" name="Code"><br>
+
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="bnr-one">
+                        <div class="bnr-left">
+                            <p>Name</p>
+                        </div>
+
+                        <input type="text" id="Name" name="Name"><br>
+
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <div class="bnr-btn">
+                        <input type="submit" value="Save" />
+                    </div>
+                </div>
+                <br/>       
+
+            </div>
+
+        </form>
+
+    </div>
+    <br />
+    <br />
+    <br />
+    <br />
+    <br/>
+
+</div>
+
+@section scripts
+ {
+
+    <script src="~/Asset/js/jquery.min.js"></script>
+    <script src="~/Scripts/jquery-2.2.3.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Asset/js/move-top.js"></script>
+    <script src="~/Asset/js/easing.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            $("#myForm").validate({
+                rules: {
+                    Code: "required",
+                    Name: "required"
+                },
+                messages: {
+                    Code: "Code is Required",
+                    Name: "Name is Required"
+
+                }
+                
+            });
+           
+            validate.style.color = "red";
+        });
+    </script>
+}
+
